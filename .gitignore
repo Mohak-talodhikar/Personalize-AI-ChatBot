@@ -1,0 +1,18 @@
+# --- Environment Files ---
+.env
+envzia/
+venv/
+
+# --- Databases and CSV Files ---
+Zia.db
+contacts.csv
+
+# --- Python Cache and Compiled Files ---
+__pycache__/
+
+# --- Engine Temporary Files ---
+/engine/__pycache__/
+/engine/cookies.json
+
+# --- IDE or Editor Configs ---
+.vscode/
