@@ -25,8 +25,8 @@ api_key = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=api_key)
 
 
-# Process 1: Ha Jarvis cha main UI aani logic sambhalto
-def startJarvis():
+# Process 1: Ha Zia cha main UI aani logic sambhalto
+def startZia():
     """Ha function Eel UI start karto aani saglya JS calls la handle karto."""
     print("Process 1 (Zia UI) is starting...")
     
@@ -108,7 +108,7 @@ def listenHotword():
 if __name__ == '__main__':
     print("Starting Jarvis Application...")
 
-    p1 = multiprocessing.Process(target=startJarvis)
+    p1 = multiprocessing.Process(target=startZia)
     p2 = multiprocessing.Process(target=listenHotword)
 
     p1.start()
