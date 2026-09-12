@@ -15,24 +15,26 @@ def speak(text):
     engine.runAndWait()
 
 
-def takecommand(timeout=3, phrase_time_limit=5):
+def takecommand(timeout=10, phrase_time_limit=8):
     r = sr.Recognizer()
     
-    # Adjust these parameters for better recognition
-    r.energy_threshold = 3000  # Adjust based on your environment (lower for more sensitivity)
+    # Lower threshold = more sensitive to normal voice
+    r.energy_threshold = 1000
     r.dynamic_energy_threshold = True
-    r.pause_threshold = 0.8
+    r.pause_threshold = 1.0
     
     print("\nListening... (speak now)")
     eel.DisplayMessage("Listening...")
     
     try:
         with sr.Microphone() as source:
-            # Adjust for ambient noise
-            r.adjust_for_ambient_noise(source, duration=0.5)
+            # Listen longer for ambient noise so voice is clear
+            print("Adjusting for background noise... please wait")
+            r.adjust_for_ambient_noise(source, duration=1)
+            print(f"Energy threshold set to: {r.energy_threshold}")
             
             try:
-                # Listen with shorter timeouts
+                # Longer timeout so you get time to start speaking
                 audio = r.listen(source, timeout=timeout, phrase_time_limit=phrase_time_limit)
                 
                 print("Recognizing...")
@@ -55,6 +57,7 @@ def takecommand(timeout=3, phrase_time_limit=5):
                 
             except sr.WaitTimeoutError:
                 print("No speech detected within the timeout period.")
+                eel.DisplayMessage("I didn't hear you. Click mic again and speak louder / closer.")
                 return ""
                 
     except OSError as e:
@@ -87,41 +90,6 @@ def allCommands(message=1):
         if "open" in query:
             from engine.features import openCommand
             openCommand(query)
-        elif "on youtube" in query:
-            from engine.features import PlayYoutube
-            PlayYoutube(query)
-        
-        elif "send message" in query or "phone call" in query or "video call" in query:
-            from engine.features import findContact, whatsApp, makeCall, sendMessage
-            contact_no, name = findContact(query)
-            if(contact_no != 0):
-                speak("Which mode you want to use whatsapp or mobile")
-                preferance = takecommand()
-                print(preferance)
-
-                if "mobile" in preferance:
-                    if "send message" in query or "send sms" in query: 
-                        speak("what message to send")
-                        message = takecommand()
-                        sendMessage(message, contact_no, name)
-                    elif "phone call" in query:
-                        makeCall(name, contact_no)
-                    else:
-                        speak("please try again")
-                elif "whatsapp" in preferance:
-                    message = ""
-                    if "send message" in query:
-                        message = 'message'
-                        speak("what message to send")
-                        query = takecommand()
-                                        
-                    elif "phone call" in query:
-                        message = 'call'
-                    else:
-                        message = 'video call'
-                                        
-                    whatsApp(contact_no, query, message, name)
-
         else:
             from engine.features import chatBot
             chatBot(query)

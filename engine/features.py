@@ -10,10 +10,8 @@ import eel
 import pyaudio
 from engine.command import speak
 from engine.config import ASSISTANT_NAME
-import pywhatkit as kit
 import pvporcupine
 import google.generativeai as genai
-from engine.helper import extract_yt_term, remove_words
 
 # Gemini configuration - Load from environment variables
 import os
@@ -81,12 +79,6 @@ def openCommand(query):
                         speak("not found")
         except:
             speak("some thing went wrong")
-
-def PlayYoutube(query):
-    search_term = extract_yt_term(query)
-    speak("Playing "+search_term+" on YouTube")
-    kit.playonyt(search_term)
-
 
 def hotword():
     porcupine=None
@@ -205,12 +197,4 @@ def chatBot(query):
         print(error_msg)
         speak("Sorry, I encountered an unexpected error. Please try again.")
         return error_msg
-
-def makeCall(name, mobileNo):
-    mobileNo = mobileNo.replace(" ", "")
-    speak(f"Mobile calling is disabled. Would have called {name} at {mobileNo}")
-
-def sendMessage(message, mobileNo, name):
-    speak(f"Mobile messaging is disabled. Would have sent to {name} at {mobileNo}: {message}")
-    speak("Message sending functionality requires mobile device connection which is currently disabled")
 

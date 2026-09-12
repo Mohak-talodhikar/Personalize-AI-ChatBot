@@ -7,7 +7,6 @@ import eel
 # --- Main.py madhun import kelele functions ---
 from engine.features import *
 from engine.command import *
-from engine.auth import recoganize
 from engine.features import playAssistantSound
 from engine.features import hotword
 
@@ -42,28 +41,8 @@ def startZia():
             
         eel.hideLoader()
         
-        # Try face authentication if files exist, otherwise skip
+        # Face authentication removed - start directly
         try:
-            import os
-            trainer_file = os.path.join('engine', 'auth', 'trainer', 'trainer.yml')
-            haarcascade_file = os.path.join('engine', 'auth', 'haarcascade_frontalface_default.xml')
-            
-            if os.path.exists(trainer_file) and os.path.exists(haarcascade_file):
-                print("Starting face authentication...")
-                flag = recoganize.AuthenticateFace()
-                if flag == 1:
-                    eel.hideFaceAuth()
-                    speak("Face authentication successful")
-                    eel.hideFaceAuthSuccess()
-                else:
-                    speak("Face authentication failed, continuing in limited mode")
-                    eel.hideFaceAuth()
-                    eel.hideFaceAuthSuccess()
-            else:
-                print("Face authentication files not found, skipping...")
-                eel.hideFaceAuth()
-                eel.hideFaceAuthSuccess()
-                
             # Initialize Gemini API with error handling
             try:
                 load_dotenv()
@@ -81,8 +60,6 @@ def startZia():
         except Exception as e:
             print(f"Error during initialization: {e}")
             # Continue with minimal functionality
-            eel.hideFaceAuth()
-            eel.hideFaceAuthSuccess()
             eel.hideStart()
             speak("Starting in limited mode. Some features may not be available.")
 
@@ -106,7 +83,7 @@ def listenHotword():
 
 # === Main Program itun start hoto ===
 if __name__ == '__main__':
-    print("Starting Jarvis Application...")
+    print("Starting Zia Application...")
 
     p1 = multiprocessing.Process(target=startZia)
     p2 = multiprocessing.Process(target=listenHotword)
