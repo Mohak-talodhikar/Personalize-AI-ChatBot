@@ -11,7 +11,6 @@ No need to open the code to understand this project. This file gives you the ful
 
 - Say or type: `open youtube` → opens YouTube
 - Say or type: `open notepad` → opens an app on your PC
-- Say or type: `play Yesterday on youtube` → plays it on YouTube
 - Ask anything: `what is photosynthesis?` → Zia answers using Google Gemini AI, with voice + on-screen chat
 - Wake word: Say `Zia` to wake it (if hotword detection is running)
 
@@ -22,9 +21,8 @@ You interact through a simple web page with a mic button, text box, and chat his
 1. **Voice control** — Speak via microphone, Zia listens and speaks back
 2. **Text chat** — Type if you can't speak, same answer
 3. **App & website opener** — Opens PC apps and websites by name
-4. **YouTube player** — Plays what you ask for on YouTube
-5. **AI answers** — Uses Gemini AI for general questions
-6. **Web UI** — Clean screen with animation, chat panel, and mic button
+4. **AI answers** — Uses Gemini AI for general questions
+5. **Web UI** — Clean screen with animation, chat panel, and mic button
 
 ## How to Run (4 steps)
 
@@ -36,7 +34,7 @@ git clone https://github.com/Mohak182003/ChatBot_Assistant.git
 cd ChatBot_Assistant
 
 2. Install dependencies
-pip install eel pyttsx3 SpeechRecognition pyaudio playsound pywhatkit pvporcupine google-generativeai python-dotenv pyautogui
+pip install eel pyttsx3 SpeechRecognition pyaudio playsound pvporcupine google-generativeai python-dotenv pyautogui
 
 3. Add your API key
 # Create a file named .env in project root and add:
@@ -47,8 +45,6 @@ python run.py
 ```
 
 Then open `http://localhost:8000` if it doesn't open automatically. Click mic or type in the box.
-
-> Face login is optional. If face files are missing, Zia skips it and starts normally.
 
 ## Tech Used (in plain words)
 
@@ -64,7 +60,7 @@ Then open `http://localhost:8000` if it doesn't open automatically. Click mic or
 ```
 Zia/
 ├── run.py          # Starts the app (UI + wake-word listener)
-├── engine/         # Brain: voice, AI answers, open app, YouTube
+├── engine/         # Brain: voice, AI answers, open app
 ├── web/            # Screen: index.html, style, JS
 ├── zia.db          # App/website names and paths
 └── .env            # Your API key (you create this, never share it)
