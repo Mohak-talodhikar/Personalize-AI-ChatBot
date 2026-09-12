@@ -9,8 +9,6 @@ No need to open the code to understand this project. This file gives you the ful
 
 ## What can you do with Zia?
 
-- Say or type: `open youtube` → opens YouTube
-- Say or type: `open notepad` → opens an app on your PC
 - Ask anything: `what is photosynthesis?` → Zia answers using Google Gemini AI, with voice + on-screen chat
 - Wake word: Say `Zia` to wake it (if hotword detection is running)
 
@@ -20,9 +18,8 @@ You interact through a simple web page with a mic button, text box, and chat his
 
 1. **Voice control** — Speak via microphone, Zia listens and speaks back
 2. **Text chat** — Type if you can't speak, same answer
-3. **App & website opener** — Opens PC apps and websites by name
-4. **AI answers** — Uses Gemini AI for general questions
-5. **Web UI** — Clean screen with animation, chat panel, and mic button
+3. **AI answers** — Uses Gemini AI for general questions
+4. **Web UI** — Clean screen with animation, chat panel, and mic button
 
 ## How to Run (4 steps)
 
@@ -53,25 +50,32 @@ Then open `http://localhost:8000` if it doesn't open automatically. Click mic or
 - **HTML/CSS/JS + Bootstrap** — the screen you see and click
 - **SpeechRecognition + Pyttsx3** — to listen and to speak (Windows voice)
 - **Gemini AI** — to answer general questions
-- **SQLite (zia.db)** — small database that remembers app names and paths
 
 ## Project Structure
 
 ```
 Zia/
 ├── run.py          # Starts the app (UI + wake-word listener)
-├── engine/         # Brain: voice, AI answers, open app
+├── engine/         # Brain: voice, AI answers
 ├── web/            # Screen: index.html, style, JS
-├── zia.db          # App/website names and paths
 └── .env            # Your API key (you create this, never share it)
 ```
 
 ## Good to Know
 
-- Works best on **Windows** (uses Windows voice + app opening).
+- Works best on **Windows** (uses Windows voice).
 - Microphone + internet required.
-- If no API key, Zia still opens apps but can't answer AI questions.
+- Gemini API key is required for answers.
+- Zia does **not** do phone calls, messages, YouTube, or app opening — only voice + text AI chat.
 
 ## License
 
 MIT License — free to use, modify, and share with credit. See `LICENSE`.
+
+## About the developer
+
+**Mohak Talodhikar**
+
+- [LinkedIn](https://www.linkedin.com/in/mohak-talodhikar/)
+- [GitHub](https://github.com/mohaktalodhikar)
+- [Instagram](https://www.instagram.com/mohak_talodhikar/)
