@@ -1,62 +1,81 @@
-# 🌟 Zia Assistant (ChatBot Assistant)
+# Zia — Voice + Text Personal Assistant
 
-Zia Assistant is an AI-powered **voice and text chatbot** built using Python. It acts as a smart personal assistant capable of understanding voice commands, answering user queries, and engaging in natural conversations. The project aims to provide an interactive and intelligent communication experience through speech recognition and natural language processing (NLP) technologies.
+**Zia is a personal assistant for your computer. Talk to it or type, and it responds with voice + text.**
+Like Alexa/Siri, but runs on your PC with a web screen.
 
-
----
-
-## 🚀 Features
-- 🎤 **Voice Interaction** – Talk directly to your assistant using your microphone.  
-- 💬 **Text Chat Mode** – Type questions or commands for instant replies.  
-- 🌐 **Web-based Interface** – User-friendly web dashboard for interaction.  
-- 🧠 **AI-Powered Responses** – Uses NLP (Natural Language Processing) to generate intelligent replies.  
-- ⚙️ **Customizable** – Easily extend functionalities and commands.  
+No need to open the code to understand this project. This file gives you the full picture.
 
 ---
 
-## 📂 Project Structure
-ChatBot_Assistant/
+## What can you do with Zia?
 
-├── static/ # CSS, JS, and frontend assets
+- Say or type: `open youtube` → opens YouTube
+- Say or type: `open notepad` → opens an app on your PC
+- Say or type: `play Yesterday on youtube` → plays it on YouTube
+- Ask anything: `what is photosynthesis?` → Zia answers using Google Gemini AI, with voice + on-screen chat
+- Wake word: Say `Zia` to wake it (if hotword detection is running)
 
-├── templates/ # HTML frontend files
+You interact through a simple web page with a mic button, text box, and chat history.
 
-├── app.py # Flask / Main application file
+## Key Features
 
-├── requirements.txt # Python dependencies
+1. **Voice control** — Speak via microphone, Zia listens and speaks back
+2. **Text chat** — Type if you can't speak, same answer
+3. **App & website opener** — Opens PC apps and websites by name
+4. **YouTube player** — Plays what you ask for on YouTube
+5. **AI answers** — Uses Gemini AI for general questions
+6. **Web UI** — Clean screen with animation, chat panel, and mic button
 
-├── .gitignore # Ignored files
+## How to Run (4 steps)
 
-└── README.md # Project documentation
+**You need:** Windows PC, Python 3.10+, microphone, Gemini API key (free from Google AI Studio).
 
----
-
-## 🛠️ Installation and Setup
-### 1. Clone the repository
 ```bash
+1. Clone the project
 git clone https://github.com/Mohak182003/ChatBot_Assistant.git
 cd ChatBot_Assistant
+
+2. Install dependencies
+pip install eel pyttsx3 SpeechRecognition pyaudio playsound pywhatkit pvporcupine google-generativeai python-dotenv pyautogui
+
+3. Add your API key
+# Create a file named .env in project root and add:
+GEMINI_API_KEY=your_key_here
+
+4. Start Zia
+python run.py
 ```
 
-▶️ Usage
+Then open `http://localhost:8000` if it doesn't open automatically. Click mic or type in the box.
 
-  >Use your microphone to ask questions or issue commands.
+> Face login is optional. If face files are missing, Zia skips it and starts normally.
 
-  >You can also type input through the web interface.
+## Tech Used (in plain words)
 
-  >The assistant will process your input and respond with generated answers.
+- **Python** — main brain of Zia
+- **Eel** — connects Python to the web page
+- **HTML/CSS/JS + Bootstrap** — the screen you see and click
+- **SpeechRecognition + Pyttsx3** — to listen and to speak (Windows voice)
+- **Gemini AI** — to answer general questions
+- **SQLite (zia.db)** — small database that remembers app names and paths
 
-📜 License
+## Project Structure
 
-  This project is licensed under the MIT License.
+```
+Zia/
+├── run.py          # Starts the app (UI + wake-word listener)
+├── engine/         # Brain: voice, AI answers, open app, YouTube
+├── web/            # Screen: index.html, style, JS
+├── zia.db          # App/website names and paths
+└── .env            # Your API key (you create this, never share it)
+```
 
-  You are free to use, modify, and distribute it with attribution.
+## Good to Know
 
+- Works best on **Windows** (uses Windows voice + app opening).
+- Microphone + internet required.
+- If no API key, Zia still opens apps but can't answer AI questions.
 
-🙏 Acknowledgements
+## License
 
-  >SpeechRecognition
-
-  >pyttsx3
-
-  >Eel
+MIT License — free to use, modify, and share with credit. See `LICENSE`.
