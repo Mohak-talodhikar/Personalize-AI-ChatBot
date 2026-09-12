@@ -87,7 +87,7 @@ def allCommands(message=1):
         eel.senderText(query)
     
     try:
-        if "open" in query:
+        if "open" in query and "youtube" not in query:
             from engine.features import openCommand
             openCommand(query)
         else:
