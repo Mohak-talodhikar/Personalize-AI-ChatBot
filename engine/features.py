@@ -1,20 +1,14 @@
 import os
-import shlex
-quote = shlex.quote
-import sqlite3
 import struct
 import time
-import webbrowser
 from playsound import playsound
 import eel
 import pyaudio
 from engine.command import speak
-from engine.config import ASSISTANT_NAME
 import pvporcupine
 import google.generativeai as genai
 
 # Gemini configuration - Load from environment variables
-import os
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -43,42 +37,10 @@ if GEMINI_API_KEY:
 else:
     print("Warning: GEMINI_API_KEY not found in environment variables")
 
-con = sqlite3.connect("zia.db")
-cursor = con.cursor()
-
 @eel.expose
 def playAssistantSound():
     music_dir = "web\\assets\\audio\\start_sound.mp3"
     playsound(music_dir)
-
-def openCommand(query):
-    query = query.replace(ASSISTANT_NAME, "")
-    query = query.replace("open", "")
-    query_lower = query.lower()
-    app_name = query_lower.strip()
-
-    if app_name != "":
-        try:
-            cursor.execute('SELECT path FROM sys_command WHERE name IN (?)', (app_name,))
-            results = cursor.fetchall()
-
-            if len(results) != 0:
-                speak("Opening "+app_name)
-                os.startfile(results[0][0])
-            elif len(results) == 0: 
-                cursor.execute('SELECT url FROM web_command WHERE name IN (?)', (app_name,))
-                results = cursor.fetchall()
-                if len(results) != 0:
-                    speak("Opening "+app_name)
-                    webbrowser.open(results[0][0])
-                else:
-                    speak("Opening "+app_name)
-                    try:
-                        os.system('start '+app_name)
-                    except:
-                        speak("not found")
-        except:
-            speak("some thing went wrong")
 
 def hotword():
     porcupine=None

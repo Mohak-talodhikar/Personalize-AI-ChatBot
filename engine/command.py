@@ -87,12 +87,8 @@ def allCommands(message=1):
         eel.senderText(query)
     
     try:
-        if "open" in query and "youtube" not in query:
-            from engine.features import openCommand
-            openCommand(query)
-        else:
-            from engine.features import chatBot
-            chatBot(query)
+        from engine.features import chatBot
+        chatBot(query)
     except:
         print("error")
     
